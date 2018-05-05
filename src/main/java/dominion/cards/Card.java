@@ -19,11 +19,46 @@ public class Card {
         this.plusBuy = plusBuy;
         this.plusCards = plusCards;
     }
+    //getters
+    public String getName() {
+        return Name;
+    }
 
-    public Card copper(){
+    public String getDescription() {
+        return Description;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public int getPlusTrueasure() {
+        return plusTrueasure;
+    }
+
+    public int getPlusAction() {
+        return plusAction;
+    }
+
+    public int getPlusBuy() {
+        return plusBuy;
+    }
+
+    public int getPlusCards() {
+        return plusCards;
+    }
+
+    public int getVictoryPoints() {
+        return victoryPoints;
+    }
+
+    //Static
+    public static Card copper(){
         return new Card("Copper","",0,1,0,0,0,0);
     }
-    public Card estate(){
+    public static Card estate(){
         return new Card("Estate","",0,0,0,0,0,1);
     }
+
+
 }
