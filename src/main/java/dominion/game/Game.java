@@ -1,23 +1,46 @@
 package dominion.game;
 
-
 import dominion.cards.Card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
+import static dominion.game.Tools.addCardByNameToDeck;
+
 public class Game {
+    //Fields
     private ArrayList<Player> players;
     private ArrayList<Card> gameCards;
-
+    //Constructor
     public Game(int numberOfPlayers) {
-        initialisingPlayers(numberOfPlayers);
         initialisingCards();
+        initialisingPlayers(numberOfPlayers);
+
+
     }
+    //Helper Methods
     private void initialisingPlayers(int numberOfPlayers){
         this.players = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player());
+
+        }
+        initialisingPlayersDeck_andHand();
+    }
+    private void initialisingPlayersDeck_andHand(){
+        for (Player player : players) {
+
+            Stack<Card> playersDeck = player.getDeck();
+            ArrayList<Card> playersHand = player.getHand();
+
+            addCardByNameToDeck(7,"Copper",gameCards,playersDeck);
+            addCardByNameToDeck(3,"Estate",gameCards,playersDeck);
+
+            Collections.shuffle(playersDeck);
+
+            Tools.drawCardsFromDeck(5,playersDeck,playersHand);
+
         }
     }
     private void initialisingCards(){
@@ -26,14 +49,17 @@ public class Game {
         gameCards.add(Card.estate());
 
     }
-    private void initialisingPlayersDeck(){
-        for (Player player : players) {
-            Stack<Card> playersDeck = player.getDeck();
-            Tools.addCardByNameToDeck(7,"Copper",gameCards,playersDeck);
-            Tools.addCardByNameToDeck(7,"Estate",gameCards,playersDeck);
-        }
-    }
 
+
+   /* public void gameRound(){
+        for (Player player: players) {
+
+
+        }
+    }*/
+
+
+    //Getters
     public ArrayList<Player> getPlayers() {
         return players;
     }

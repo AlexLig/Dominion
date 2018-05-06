@@ -3,6 +3,7 @@ package dominion.game;
 import dominion.cards.Card;
 
 import java.util.List;
+import java.util.Stack;
 
 public class Tools {
 
@@ -24,9 +25,16 @@ public class Tools {
 
     }
 
-    public static void addCardByNameToDeck(int times, String name, Iterable<Card> fromThisDeck , List<Card> toThisDeck) {
-        addCardToDeck(times,findCardByName(name,fromThisDeck),toThisDeck);
+    public static void addCardByNameToDeck(int times, String name, Iterable<Card> fromThisDeck, List<Card> toThisDeck) {
+        addCardToDeck(times, findCardByName(name, fromThisDeck), toThisDeck);
 
+    }
+
+    public static void drawCardsFromDeck(int numberOfCards, Stack<Card> fromThisDeck, List<Card> toThisDeck) {
+
+        for (int i = 0; i < numberOfCards; i++) {
+            toThisDeck.add(fromThisDeck.pop());
+        }
     }
 
 }
