@@ -37,4 +37,19 @@ public class Tools {
         }
     }
 
+    public static void moveCardToDeck(Card card, List<Card> fromThisDeck, List<Card> toThisDeck) {
+        toThisDeck.add(card);
+        fromThisDeck.remove(card);
+    }
+
+    public static int countCardInDeck(Card card, Iterable<Card> deck) {
+        int count = 0;
+        for (Card tempCard:deck){
+            if(tempCard.getName() == card.getName()){
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

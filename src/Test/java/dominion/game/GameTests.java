@@ -17,4 +17,10 @@ public class GameTests {
         Assertions.assertEquals(2,game.getGameCards().size());
     }
 
+    @Test
+    public void testSomething(){
+        Game game = new Game(4);
+
+    }
+
 }

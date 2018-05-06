@@ -1,6 +1,7 @@
 package dominion.game;
 
 import dominion.cards.Card;
+import dominion.cards.CardType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,12 +52,12 @@ public class Game {
     }
 
 
-   /* public void gameRound(){
+    public void gameRound(){
         for (Player player: players) {
-
-
+            player.playHand(CardType.ACTION);
+            player.playHand(CardType.TREASURE);
         }
-    }*/
+    }
 
 
     //Getters

@@ -60,7 +60,6 @@ public class PlayerTests {
             assertCard(allCards.get(i), cards[i]);
         }
     }
-
     private void assertCard(Card card, String c) {
         if (c == "C") {
             assertEquals(CardType.TREASURE, card.getCardType());
@@ -86,28 +85,42 @@ public class PlayerTests {
         }
 
     }
-    /*
+
 
     @Test
     public void players_turn_initiallyHas_1Buy_1Action_0Treasure() {
-        //Arrange
-        Player player = new Player();
-        //Act
-        player.newTurn();
-        //Assert
-        assertEquals(1,player.getTurn().getNumberOfBuys());
-        assertEquals(1,player.getTurn().getNumberOfActions());
-        assertEquals(0,player.getTurn().getTreasurePoins());
+
+        // Arrange
+        Game game = new Game(4);
+
+        for (Player player : game.getPlayers()) {
+            //Assert
+            assertEquals(1,player.getNumberOfBuys());
+            assertEquals(1,player.getNumberOfActions());
+            assertEquals(0,player.getTreasurePoints());
+        }
+
+
+
+    }
+    @Test
+    public void playersPlay_Treasure_copper_awardsCorrectly() {
+
+        // Arrange
+        Game game = new Game(4);
+
+        for (Player player : game.getPlayers()) {
+            //Act
+
+            player.playHand(CardType.TREASURE);
+            //Assert
+            int x = Tools.countCardInDeck(Card.copper(),player.getHand());
+            assertEquals(x,player.getTreasurePoints());
+        }
+
+
 
     }
 
-    @Test
-    public void copperAwards_1TreasurePoint(){
-        //Arrange
-        Player player = new Player();
-        //Act
-        player.play(Treasure.copper());
-
-    } */
 
 }
