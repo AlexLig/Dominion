@@ -1,5 +1,6 @@
-package dominion.game;
+package game;
 
+import dominion.game.Game;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +18,6 @@ public class GameTests {
         Assertions.assertEquals(2,game.getGameCards().size());
     }
 
-    @Test
-    public void testSomething(){
-        Game game = new Game(4);
 
-    }
 
 }

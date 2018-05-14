@@ -20,6 +20,7 @@ public class Card {
         this.plusAction = plusAction;
         this.plusBuy = plusBuy;
         this.plusCards = plusCards;
+        this.victoryPoints = victoryPoints;
     }
     //getters
     public String getName() {
