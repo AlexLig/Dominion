@@ -1,101 +1,76 @@
 package dominion.game;
 
 import dominion.cards.Card;
-import dominion.cards.CardType;
+import dominion.cards.Treasure;
+import dominion.cards.Victory;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Game {
     //Fields
     private ArrayList<Player> players;
     private ArrayList<String> pileOfCards;
-    private Map<String, Card> cards;
+    private Map<String, Card> cardMap;
     private Player activePlayer;
+
 
     //Constructor
     public Game(int numberOfPlayers) {
-        initialisingCards();
+
+        this.cardMap = new HashMap<>();
+        this.pileOfCards = new ArrayList<>();
+        this.players = new ArrayList<>();
+
+        initialisingNamesToCardsMapping();
+        initialisingPileOfCards();
         initialisingPlayers(numberOfPlayers);
 
 
     }
 
+
     //Helper Methods
-    private void initialisingCards() {
-        this.gameCards = new ArrayList<>();
-        gameCards.add(Card.copper());
-        gameCards.add(Card.estate());
+    private void initialisingNamesToCardsMapping() {
+
+        cardMap.put("Copper", Treasure.copper());
+        cardMap.put("Estate", Victory.estate());
 
     }
 
+    private void initialisingPileOfCards() {
+
+        addCard("Copper", 30, pileOfCards);
+        addCard("Estate", 30, pileOfCards);
+
+
+    }
+
+    private void addCard(String card, int times, List<String> toHere) {
+        for (int i = 0; i < times; i++) {
+            toHere.add(card);
+        }
+    }
 
     private void initialisingPlayers(int numberOfPlayers) {
-        this.players = new ArrayList<>();
+
         for (int i = 0; i < numberOfPlayers; i++) {
-            players.add(new Player());
+            players.add(new Player(pileOfCards));
 
         }
 
     }
 
 
-
-    /*
-    public void gameRound() {
-        for (Player player : players) {
-
-            playHandOfPlayer(player);
-            player.endOfTurn();
-
-        }
+    public ArrayList<String> getPileOfCards() {
+        return pileOfCards;
     }
 
-
-    public void playHandOfPlayer(Player player) {
-        for (Card card : player.getHand()) {
-
-            player.addToNumberOfActions(card.getPlusAction());
-            player.addToNumberOfBuys(card.getPlusBuy());
-            player.addToTreasurePoints(card.getPlusTreasure());
-
-        }
-    }
-    */
-
-    public Player getWinner() {
-
-        countVictoryCards();
-        Player winner = Collections.max(players, Comparator.comparing(Player::getVictoryPoints));
-        return winner;
-
-    }
-
-    public void countVictoryCards() {
-        for (Player player : players) {
-            for (Card card : player.getAllCards()) {
-                if (card.getCardType() == CardType.VICTORY) {
-                    player.addVictoryPoints(card.getVictoryPoints());
-                }
-
-            }
-
-        }
-    }
-
-
-    //Getters
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public ArrayList<Card> getGameCards() {
-        return gameCards;
-    }
 
-    public Player getActivePlayer() {
-        return activePlayer;
-    }
 }

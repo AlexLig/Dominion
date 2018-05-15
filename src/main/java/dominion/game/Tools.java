@@ -37,7 +37,7 @@ public class Tools {
         }
     }
 
-    public static void moveCardToDeck(Card card, List<Card> fromThisDeck, List<Card> toThisDeck) {
+    public static void moveCardToDeck(String card, List<String> fromThisDeck, List<String> toThisDeck) {
         toThisDeck.add(card);
         fromThisDeck.remove(card);
     }

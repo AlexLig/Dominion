@@ -1,3 +1,4 @@
+
 package game;
 
 import dominion.game.Game;
@@ -9,14 +10,10 @@ public class GameTests {
     @Test
     public void numberOfPlayers(){
         Game game = new Game(4);
-        Assertions.assertEquals(4,game.getPlayers().size());
+        Assertions.assertEquals(4, game.getPlayers().size());
     }
 
-    @Test
-    public void how_many_Cards_the_game_has(){
-        Game game = new Game(4);
-        Assertions.assertEquals(2,game.getGameCards().size());
-    }
+
 
 
 

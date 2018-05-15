@@ -1,4 +1,5 @@
 package game;
+import dominion.cards.Card;
 import dominion.cards.Treasure;
 import dominion.game.Game;
 import dominion.game.Player;
@@ -8,10 +9,24 @@ import org.junit.jupiter.api.Test;
 public class CardTests {
 
     @Test
-    public void testSomething(){
+    public void copperCard_awardsOneTreasurePoint_toPlayersTurn(){
         Player player = new Player();
-        Treasure.copper().
+        Treasure.copper().activate(player);
+        Assertions.assertEquals(1, player.getTurn().getTreasurePoints());
 
+    }
+    @Test
+    public void silverCard_awardsTwoTreasurePoints_toPlayersTurn(){
+        Player player = new Player();
+        Treasure.silver().activate(player);
+        Assertions.assertEquals(2, player.getTurn().getTreasurePoints());
+
+    }
+    @Test
+    public void goldCard_awardsThreeTreasurePoints_toPlayersTurn(){
+        Player player = new Player();
+        Treasure.gold().activate(player);
+        Assertions.assertEquals(3, player.getTurn().getTreasurePoints());
 
     }
 }

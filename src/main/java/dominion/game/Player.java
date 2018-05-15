@@ -7,35 +7,45 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import static dominion.game.Tools.*;
-
 public class Player {
-    private Stack<Card> deck;
-    private ArrayList<Card> hand;
-    private ArrayList<Card> discard;
+    private Stack<String> deck;
+    private ArrayList<String> hand;
+    private ArrayList<String> discard;
     private int victoryPoints;
     private Turn turn;
-
 
     public Player() {
         this.deck = new Stack<>();
         this.hand = new ArrayList<>();
         this.discard = new ArrayList<>();
         this.victoryPoints = 0;
-
-        initialisingPlayersDeck_andHand();
-
-
+        this.turn = new Turn();
     }
-    private void initialisingPlayersDeck_andHand(){
 
-        addCardToDeck(7,Card.copper(),deck);
-        addCardToDeck(3,Card.estate(),deck);
+    public Player(List<String> pileOfCards) {
+        this.deck = new Stack<>();
+        this.hand = new ArrayList<>();
+        this.discard = new ArrayList<>();
+        this.victoryPoints = 0;
+        this.turn = new Turn();
+        initialisingPlayersDeck_andHand(pileOfCards);
+    }
+
+    private void initialisingPlayersDeck_andHand(List<String> pileOfCards){
+
+        addCardToDeckFromDeck("Copper",7,pileOfCards,deck);
+        addCardToDeckFromDeck("Estate",3,pileOfCards,deck);
         Collections.shuffle(deck);
-        drawCardsFromDeck(5, deck, hand);
-
+        drawCards(5);
 
     }
+    private void addCardToDeckFromDeck(String card, int times, List<String> fromHere, List<String> toHere){
+        for (int i = 0; i < times ; i++) {
+            toHere.add(card);
+            fromHere.remove(card);
+        }
+    }
+
 
 
 
@@ -72,47 +82,26 @@ public class Player {
         Collections.shuffle(deck);
     }
 
-    public void playCardByName(String cardName){
-        playCard(findCardByName(cardName,hand));
-
-    }
-    private void playCard (Card card){
-
-    }
 
 
-    public List<Card> getAllCards() {
-        ArrayList<Card> allCards = new ArrayList<>();
-        allCards.addAll(deck);
-        allCards.addAll(hand);
-        allCards.addAll(discard);
-        return allCards;
-    }
 
-    public int getVictoryPoints() {
-        return victoryPoints;
-    }
 
-    public void addVictoryPoints(int victoryPoints) {
-        this.victoryPoints += victoryPoints;
-    }
 
-    public Stack<Card> getDeck() {
-        return deck;
-    }
-
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
-
-    public ArrayList<Card> getDiscard() {
-        return discard;
-    }
 
 
     public Turn getTurn() {
         return turn;
     }
 
+    public List<String> getAllCards() {
+        ArrayList<String> allCards = new ArrayList<>();
+        allCards.addAll(deck);
+        allCards.addAll(hand);
+        allCards.addAll(discard);
+        return allCards;
+    }
 
+    public List<String> getHand() {
+        return hand;
+    }
 }

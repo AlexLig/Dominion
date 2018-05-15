@@ -1,14 +1,11 @@
 package game;
 
 import dominion.cards.Card;
-import dominion.cards.CardType;
+import dominion.game.Game;
 import dominion.game.Player;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
 
 public class PlayerTests {
 
@@ -18,20 +15,22 @@ public class PlayerTests {
     @Test
     public void player_initially_has_7_single_copper_and_3_estate_cards() {
         //Arrange
-        Player player = new Player();
+
+        Game game = new Game(4);
+        Player player = game.getPlayers().get(0);
         //Act
-        List<Card> allCards = player.getAllCards();
+        List<String> allCards = player.getAllCards();
 
         //Assert
-        assertHasCards(allCards,7, Card.copper());
-        assertHasCards(allCards,3, Card.estate());
+        assertHasCards(allCards,7, "Copper");
+        assertHasCards(allCards,3, "Estate");
 
     }
 
-    private void assertHasCards(List<Card> allCards, int number, Card card){
+    private void assertHasCards(List<String> allCards, int number, String card){
         int cardsFound=0;
-        for (Card eachCard : allCards) {
-            if (eachCard.getName() == card.getName()){
+        for (String eachCard : allCards) {
+            if (eachCard == card){
                 ++cardsFound;
             }
 
@@ -42,33 +41,15 @@ public class PlayerTests {
 
 
     }
-    private void assertCards(Player player, String... cards) {
-        List<Card> allCards = player.getAllCards();
 
-        assertEquals(cards.length, allCards.size());
-
-        for (int i = 0; i < cards.length; i++) {
-            assertCard(allCards.get(i), cards[i]);
-        }
-    }
-    private void assertCard(Card card, String c) {
-        if (c == "C") {
-            assertEquals(CardType.TREASURE, card.getCardType());
-            assertEquals("Copper", card.getName());
-        }
-        else if (c == "V1") {
-            Card expected = Card.estate();
-            assertEquals(expected.getCardType(), card.getCardType());
-            assertEquals(expected.getName(), card.getName());
-        }
-    }
 
     @Test
     public void playerInitiallyHas5CardsOnHand() {
         // Arrange
-        Player player = new Player();
+        Game game = new Game(4);
+        Player player = game.getPlayers().get(0);
         // Act
-        List<Card> cards = player.getHand();
+        List<String> cards = player.getHand();
         // Assert
         assertEquals(5, cards.size());
     }
@@ -76,30 +57,29 @@ public class PlayerTests {
     @Test
     public void playerHas5CardsOnHand() {
         // Arrange
-        Player player = new Player();
+        Game game = new Game(4);
+        Player player = game.getPlayers().get(0);
+
         // Act
         player.endOfTurn();
-        List<Card> cards = player.getHand();
-
+        List<String> cards = player.getHand();
         // Assert
         assertEquals(5, cards.size());
 
         // Act
         player.endOfTurn();
         cards = player.getHand();
+        // Assert
+        assertEquals(5, cards.size());
 
+        // Act
+        player.endOfTurn();
+        cards = player.getHand();
         // Assert
         assertEquals(5, cards.size());
     }
 
 
-    @Test
-    public void copperAwards_1TreasurePoint(){
-        //Arrange
-        Player player = new Player();
-        //Act
 
-
-    }
 
 }

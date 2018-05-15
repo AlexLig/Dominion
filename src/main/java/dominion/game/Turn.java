@@ -2,15 +2,15 @@ package dominion.game;
 
 public class Turn {
     private int treasurePoints;
-    private int numberOfActions;
-    private int numberOfBuys;
+    private int actionPoints;
+    private int buyPoints;
 
 
 
     public Turn() {
         this.treasurePoints = 0 ;
-        this.numberOfActions = 1;
-        this.numberOfBuys = 1;
+        this.actionPoints = 1;
+        this.buyPoints = 1;
 
     }
 
@@ -22,19 +22,19 @@ public class Turn {
         this.treasurePoints += treasurePoints;
     }
 
-    public int getNumberOfActions() {
-        return numberOfActions;
+    public int getActionPoints() {
+        return actionPoints;
     }
 
-    public void setNumberOfActions(int numberOfActions) {
-        this.numberOfActions = numberOfActions;
+    public void setActionPoints(int actionPoints) {
+        this.actionPoints = actionPoints;
     }
 
-    public int getNumberOfBuys() {
-        return numberOfBuys;
+    public int getBuyPoints() {
+        return buyPoints;
     }
 
-    public void setNumberOfBuys(int numberOfBuys) {
-        this.numberOfBuys = numberOfBuys;
+    public void setBuyPoints(int buyPoints) {
+        this.buyPoints = buyPoints;
     }
 }

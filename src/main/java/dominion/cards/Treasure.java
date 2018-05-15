@@ -14,13 +14,21 @@ public class Treasure extends Card{
         this.plusTreasure = new PlusTreasure(treasurePoints);
     }
 
-    public void activate(Player player){
-        plusTreasure.activate(player);
-    }
 
 
 
-    public static Card copper(){
+
+    public static Treasure copper(){
         return new Treasure("Copper","",0, 1);
+    }
+    public static Treasure silver(){
+        return new Treasure("Silver","",3, 2);
+    }
+    public static Treasure gold(){
+        return new Treasure("Gold","",6, 3);
+    }
+    @Override
+    public void activate(Player player) {
+        plusTreasure.activate(player);
     }
 }
