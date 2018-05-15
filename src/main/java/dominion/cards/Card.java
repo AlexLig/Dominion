@@ -1,6 +1,7 @@
 package dominion.cards;
 
 import dominion.game.Player;
+import dominion.game.PlayerState;
 
 public abstract class  Card {
     private String name;
@@ -29,5 +30,5 @@ public abstract class  Card {
         return 0;
     }
 
-    public abstract void activate(Player player);
+    public abstract void activate(PlayerState playerState);
 }

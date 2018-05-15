@@ -49,7 +49,7 @@ public class PlayerTests {
         Game game = new Game(4);
         Player player = game.getPlayers().get(0);
         // Act
-        List<String> cards = player.getHand();
+        List<String> cards = player.getPlayerState().getHand();
         // Assert
         assertEquals(5, cards.size());
     }
@@ -78,6 +78,7 @@ public class PlayerTests {
         // Assert
         assertEquals(5, cards.size());
     }
+
 
 
 

@@ -1,6 +1,7 @@
 package dominion.cards;
 
 import dominion.game.Player;
+import dominion.game.PlayerState;
 
 public class Victory extends Card {
     private int victoryPoints;
@@ -19,7 +20,7 @@ public class Victory extends Card {
     }
 
     @Override
-    public void activate(Player player) {
+    public void activate(PlayerState playerState) {
 
     }
 

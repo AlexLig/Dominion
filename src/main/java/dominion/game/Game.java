@@ -63,9 +63,18 @@ public class Game {
 
     }
 
+    public void gameRound() {
+        for (Player player : players) {
+            player.play(cardMap);
+        }
+    }
 
     public ArrayList<String> getPileOfCards() {
         return pileOfCards;
+    }
+
+    public Map<String, Card> getCardMap() {
+        return cardMap;
     }
 
     public ArrayList<Player> getPlayers() {

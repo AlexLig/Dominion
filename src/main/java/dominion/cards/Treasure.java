@@ -3,6 +3,7 @@ package dominion.cards;
 import dominion.cardEffects.CardEffect;
 import dominion.cardEffects.PlusTreasure;
 import dominion.game.Player;
+import dominion.game.PlayerState;
 
 public class Treasure extends Card{
 
@@ -27,8 +28,11 @@ public class Treasure extends Card{
     public static Treasure gold(){
         return new Treasure("Gold","",6, 3);
     }
+
     @Override
-    public void activate(Player player) {
-        plusTreasure.activate(player);
+    public void activate(PlayerState playerState) {
+        plusTreasure.activate(playerState);
     }
+
+
 }

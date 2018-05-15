@@ -2,6 +2,7 @@ package dominion.cards;
 
 import dominion.cardEffects.CardEffect;
 import dominion.game.Player;
+import dominion.game.PlayerState;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class Action extends Card {
     }
 
     @Override
-    public void activate(Player player) {
+    public void activate(PlayerState playerState) {
         for (CardEffect effect : cardEffects) {
             effect.activate();
         }

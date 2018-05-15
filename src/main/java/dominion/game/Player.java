@@ -2,40 +2,30 @@ package dominion.game;
 
 import dominion.cards.Card;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Player {
-    private Stack<String> deck;
-    private ArrayList<String> hand;
-    private ArrayList<String> discard;
+
+    private PlayerState playerState;
     private int victoryPoints;
-    private Turn turn;
 
     public Player() {
-        this.deck = new Stack<>();
-        this.hand = new ArrayList<>();
-        this.discard = new ArrayList<>();
+        this.playerState = new PlayerState();
         this.victoryPoints = 0;
-        this.turn = new Turn();
+
     }
 
     public Player(List<String> pileOfCards) {
-        this.deck = new Stack<>();
-        this.hand = new ArrayList<>();
-        this.discard = new ArrayList<>();
+        this.playerState = new PlayerState();
         this.victoryPoints = 0;
-        this.turn = new Turn();
         initialisingPlayersDeck_andHand(pileOfCards);
     }
 
     private void initialisingPlayersDeck_andHand(List<String> pileOfCards){
 
-        addCardToDeckFromDeck("Copper",7,pileOfCards,deck);
-        addCardToDeckFromDeck("Estate",3,pileOfCards,deck);
-        Collections.shuffle(deck);
+        addCardToDeckFromDeck("Copper",7,pileOfCards,playerState.getDeck());
+        addCardToDeckFromDeck("Estate",3,pileOfCards,playerState.getDeck());
+        Collections.shuffle(playerState.getDeck());
         drawCards(5);
 
     }
@@ -50,58 +40,69 @@ public class Player {
 
 
 
-    public void endOfTurn() {
 
-        discard.addAll(hand);
-        hand.clear();
-        drawCards(5);
-    }
 
     private void drawCards(int numberOfCards) {
-        if (deck.size() < numberOfCards) {
-            int tempDeckSize = deck.size();
+        if (playerState.getDeck().size() < numberOfCards) {
+            int tempDeckSize = playerState.getDeck().size();
             //draw as many cards there are left in deck
-            for (int i = 0; i < deck.size(); i++) {
-                hand.add(deck.pop());
+            for (int i = 0; i < playerState.getDeck().size(); i++) {
+                playerState.getHand().add(playerState.getDeck().pop());
             }
             discardToDeckAndShuffle();
             //draw the rest
             for (int i = 0; i < (numberOfCards - tempDeckSize); i++) {
-                hand.add(deck.pop());
+                playerState.getHand().add(playerState.getDeck().pop());
             }
         } else {
             for (int i = 0; i < (numberOfCards); i++) {
-                hand.add(deck.pop());
+                playerState.getHand().add(playerState.getDeck().pop());
             }
         }
     }
 
     private void discardToDeckAndShuffle() {
-        deck.addAll(discard);
-        discard.clear();
-        Collections.shuffle(deck);
+        playerState.getDeck().addAll(playerState.getDiscard());
+        playerState.getDiscard().clear();
+        Collections.shuffle(playerState.getDeck());
     }
 
 
-
-
-
-
-
-
-    public Turn getTurn() {
-        return turn;
+    public PlayerState getPlayerState() {
+        return playerState;
     }
+
+
 
     public List<String> getAllCards() {
         ArrayList<String> allCards = new ArrayList<>();
-        allCards.addAll(deck);
-        allCards.addAll(hand);
-        allCards.addAll(discard);
+        allCards.addAll(playerState.getDeck());
+        allCards.addAll(playerState.getHand());
+        allCards.addAll(playerState.getDiscard());
         return allCards;
     }
 
-    public List<String> getHand() {
-        return hand;
+
+
+
+
+
+    public void play(Map<String, Card> cardMap) {
+        playHand(cardMap);
+        endOfTurn();
+    }
+
+    public void playHand(Map<String, Card> cardMap) {
+        for (String card : playerState.getHand()) {
+            cardMap.get(card).activate(playerState);
+        }
+    }
+
+    public void endOfTurn() {
+
+        playerState.getDiscard().addAll(playerState.getHand());
+        playerState.getHand().clear();
+        drawCards(5);
+        playerState.setTurn(new Turn());
     }
 }

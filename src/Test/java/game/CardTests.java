@@ -11,21 +11,21 @@ public class CardTests {
     @Test
     public void copperCard_awardsOneTreasurePoint_toPlayersTurn(){
         Player player = new Player();
-        Treasure.copper().activate(player);
+        Treasure.copper().activate(player.getPlayerState());
         Assertions.assertEquals(1, player.getTurn().getTreasurePoints());
 
     }
     @Test
     public void silverCard_awardsTwoTreasurePoints_toPlayersTurn(){
         Player player = new Player();
-        Treasure.silver().activate(player);
+        Treasure.silver().activate(player.getPlayerState());
         Assertions.assertEquals(2, player.getTurn().getTreasurePoints());
 
     }
     @Test
     public void goldCard_awardsThreeTreasurePoints_toPlayersTurn(){
         Player player = new Player();
-        Treasure.gold().activate(player);
+        Treasure.gold().activate(player.getPlayerState());
         Assertions.assertEquals(3, player.getTurn().getTreasurePoints());
 
     }

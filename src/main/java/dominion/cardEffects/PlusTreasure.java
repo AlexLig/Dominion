@@ -2,6 +2,7 @@ package dominion.cardEffects;
 
 import dominion.game.Game;
 import dominion.game.Player;
+import dominion.game.PlayerState;
 
 public class PlusTreasure implements CardEffect {
     private int numberOfTreasury;
@@ -10,8 +11,8 @@ public class PlusTreasure implements CardEffect {
         this.numberOfTreasury = numberOfTreasury;
     }
 
-    public void activate(Player player){
-        player.getTurn().addTreasurePoints(numberOfTreasury);
+    public void activate(PlayerState playerState){
+        playerState.getTurn().addTreasurePoints(numberOfTreasury);
 
     }
 }
