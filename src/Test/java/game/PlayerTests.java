@@ -62,19 +62,19 @@ public class PlayerTests {
 
         // Act
         player.endOfTurn();
-        List<String> cards = player.getHand();
+        List<String> cards = player.getPlayerState().getHand();
         // Assert
         assertEquals(5, cards.size());
 
         // Act
         player.endOfTurn();
-        cards = player.getHand();
+        cards = player.getPlayerState().getHand();
         // Assert
         assertEquals(5, cards.size());
 
         // Act
         player.endOfTurn();
-        cards = player.getHand();
+        cards = player.getPlayerState().getHand();
         // Assert
         assertEquals(5, cards.size());
     }
