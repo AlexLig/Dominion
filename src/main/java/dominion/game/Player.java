@@ -14,6 +14,7 @@ public class Player {
     private ArrayList<Card> hand;
     private ArrayList<Card> discard;
     private int victoryPoints;
+    private Turn turn;
 
 
     public Player() {
@@ -109,7 +110,9 @@ public class Player {
     }
 
 
-
+    public Turn getTurn() {
+        return turn;
+    }
 
 
 }

@@ -6,12 +6,14 @@ import dominion.cards.CardType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
 
 public class Game {
     //Fields
     private ArrayList<Player> players;
-    private ArrayList<Card> gameCards;
-    private Turn turn;
+    private ArrayList<String> pileOfCards;
+    private Map<String, Card> cards;
+    private Player activePlayer;
 
     //Constructor
     public Game(int numberOfPlayers) {
@@ -91,5 +93,9 @@ public class Game {
 
     public ArrayList<Card> getGameCards() {
         return gameCards;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
     }
 }
