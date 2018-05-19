@@ -21,6 +21,21 @@ public class Turn {
     public void addTreasurePoints(int treasurePoints) {
         this.treasurePoints += treasurePoints;
     }
+    public void removeTreasurePoints(int treasurePoints) {
+        this.treasurePoints -= treasurePoints;
+    }
+    public void addBuyPoints(int buyPoints) {
+        this.buyPoints += buyPoints;
+    }
+    public void removeBuyPoints(int buyPoints) {
+        this.buyPoints -= buyPoints;
+    }
+    public void addActionPoints(int actionPoints) {
+        this.actionPoints += actionPoints;
+    }
+    public void removeActionPoints(int actionPoints) {
+        this.actionPoints -= actionPoints;
+    }
 
     public int getActionPoints() {
         return actionPoints;
