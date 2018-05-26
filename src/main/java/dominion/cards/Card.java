@@ -48,16 +48,20 @@ public abstract class  Card {
 
     public final void doPlayCard(Player player){
 
-        if (canBePlayed(player.getGame())){
+        if (canBePlayed(player)){
             activate(player);
             discardCard(player);
+            cardReport(player);
         }
 
     }
-    protected abstract boolean canBePlayed(Game game);
+    protected abstract boolean canBePlayed(Player player);
     protected abstract void activate(Player player);
     protected final void discardCard(Player player){
         player.getDiscard().add(name);
         player.getHand().remove(name);
+    }
+    protected final void cardReport(Player player){
+        System.out.println("Player " + player.getId() + ": played " + name +" card");
     }
 }

@@ -5,6 +5,7 @@ import dominion.cards.CardType;
 
 import dominion.game.Game;
 import dominion.game.TurnPhase;
+import dominion.player.Player;
 
 public abstract class Treasure extends Card {
 
@@ -14,8 +15,8 @@ public abstract class Treasure extends Card {
 
     }
 
-    protected final boolean canBePlayed(Game game) {
-        if (game.getTurnPhase().equals(TurnPhase.BUY)) {
+    protected final boolean canBePlayed(Player player) {
+        if (player.getGame().getTurnPhase().equals(TurnPhase.BUY)) {
             return true;
         } else return false;
     }

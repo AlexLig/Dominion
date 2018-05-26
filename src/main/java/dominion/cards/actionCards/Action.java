@@ -4,6 +4,7 @@ import dominion.cards.Card;
 import dominion.cards.CardType;
 import dominion.game.Game;
 import dominion.game.TurnPhase;
+import dominion.player.Player;
 
 public abstract class Action extends Card {
 
@@ -11,8 +12,8 @@ public abstract class Action extends Card {
         super(name, description, cost, cardType);
 
     }
-    protected final boolean canBePlayed(Game game) {
-        if (game.getTurnPhase().equals(TurnPhase.ACTION)) {
+    protected final boolean canBePlayed(Player player) {
+        if (player.getGame().getTurnPhase().equals(TurnPhase.ACTION) && player.getTurn().getActionPoints() > 0) {
             return true;
         } else return false;
     }

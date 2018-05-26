@@ -49,7 +49,7 @@ public class GameTests {
         assertEquals(5, player.getHand().size());
         assertEquals(1, player.getDiscard().size());
         assertEquals(0, player.getTurn().getTreasurePoints());
-        assertEquals(2, countCardsInPileOfCards(game.getPileOfCards(), "Province"));
+        assertEquals(9, countCardsInPileOfCards(game.getPileOfCards(), "Province"));
     }
     private int countCardsInPileOfCards(List<String> pileOfCards, String card){
         int count=0;

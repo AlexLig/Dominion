@@ -68,7 +68,7 @@ public class Game {
         addStringCard("Gold", 30, pileOfCards);
         addStringCard("Estate", 30, pileOfCards);
         addStringCard("Duchy", 30, pileOfCards);
-        addStringCard("Province", 3, pileOfCards);
+        addStringCard("Province", 10, pileOfCards);
         addStringCard("Smithy", 10, pileOfCards);
 
 
@@ -95,17 +95,34 @@ public class Game {
         }
     }
 
-/*
+
     public void gameLoop(){
-        for(Player player: players){
-            switchToNextPhase();
-            player.play();
-            switchToNextPhase();
-            player.play();
-            switchToNextPhase();
+        while (!gameHasEnded){
+            for(Player player: players){
+                newPhase(TurnPhase.ACTION);
+                player.play();
+                //printPlayerState(player);
+            }
         }
+        findWinner();
+        printPlayers();
+
     }
-*/
+
+    private void printPlayerState(Player player){
+        System.out.println("Player: "+player.getId());
+        System.out.print("Hand: ");
+        for( String card : player.getHand()){System.out.print(" " + card );}
+        System.out.println(" ");
+        System.out.println("Discard: ");
+        for( String card : player.getDiscard()){System.out.print(" "+ card);}
+        System.out.println(" ");
+        System.out.println("Deck: ");
+        for( String card : player.getDeck()){System.out.print(" "+ card);}
+        System.out.println(" ");
+
+
+    }
 
 
     public void newPhase(TurnPhase phase) {
@@ -116,9 +133,10 @@ public class Game {
             case ACTION:
                 turnPhase = TurnPhase.BUY;
                 break;
-            case BUY:
+           /* case BUY:
                 turnPhase = TurnPhase.ACTION;
                 break;
+           */
 
         }
     }
@@ -149,6 +167,13 @@ public class Game {
             System.out.println("Player " + i + " finished with: " + players.get(i).getVictoryPoints());
         }
         System.out.println("The winner is Player " + winner.getId() + " with: " + winner.getVictoryPoints() + " Victory Points");
+        for(Player player: players){
+            System.out.println("Player: " + player.getId());
+            for(String card: player.getAllCards()){
+                System.out.print(card + " " );
+            }
+            System.out.println();
+        }
     }
 
 
@@ -158,7 +183,12 @@ public class Game {
             player.getDiscard().add(card);
             pileOfCards.remove(card);
             player.getTurn().removeTreasurePoints(cardMap.get(card).getCost());
+            buyReport(player,card);
+            if (!pileOfCards.contains("Province")){gameHasEnded = true;}
         }
+    }
+    private void buyReport(Player player, String card){
+        System.out.println("Player " + player.getId()+": bought " + card + " card");
     }
 
 

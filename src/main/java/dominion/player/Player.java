@@ -63,10 +63,32 @@ public class Player {
 
 
     //Methods for player to play his turn
+    public final void play() {
+        readyToPlay();
+        turnReport();
+        playAllCardsInHand();
+        game.switchToNextPhase();
+        turnReport();
+        playAllCardsInHand();
+        turnReport();
+        buyThings();
+        endOfTurn();
 
+    }
 
     public void readyToPlay(){
         this.turn = new Turn();
+    }
+
+    private void turnReport(){
+        System.out.println(String.format("Player %d: Has %d Action Points. %d Buy Points. %d Treasure Points.",id,turn.getActionPoints(),turn.getBuyPoints(),turn.getTreasurePoints()));
+    }
+
+    private void playAllCardsInHand(){
+        //Iterate to a copy ArrayList of hand so the cards can discard themselves without causing any problem
+        for (String card : new ArrayList<>(hand)) {
+            playCard(card);
+        }
     }
 
     public void playCard(String card) {
@@ -75,6 +97,22 @@ public class Player {
 
         }
 
+
+    }
+
+    public void buyThings() {
+        switch (turn.getTreasurePoints()){
+            case 3: buyCard("Silver");
+            case 4: buyCard("Smithy");
+            case 5: buyCard("Smithy");
+            case 6: buyCard("Gold");
+            case 7: buyCard("Gold");
+            case 8: buyCard("Province");
+            case 9: buyCard("Province");
+            case 10: buyCard("Province");
+            case 11: buyCard("Province");
+            case 12: buyCard("Province");
+        }
 
     }
 
@@ -90,23 +128,6 @@ public class Player {
 
     }
 
-    /*
-    public void playAllCards() {
-
-        for (String card : new ArrayList<>(hand)) {
-            playCard(card);
-        }
-
-    }
-
-    public void buyThings() {
-        if(game.getTurn().getTreasurePoints()>8) buyCard("Province");
-        else if(game.getTurn().getTreasurePoints() <4) buyCard("Silver");
-        else if(game.getTurn().getTreasurePoints() == 4 ) buyCard("Smithy");
-        else if(game.getTurn().getTreasurePoints() == 6) buyCard("Gold");
-
-    }
-*/
 
     //Setters
 
@@ -153,4 +174,6 @@ public class Player {
     public int getId() {
         return id;
     }
+
+
 }

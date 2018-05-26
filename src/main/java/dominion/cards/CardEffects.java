@@ -2,6 +2,8 @@ package dominion.cards;
 
 import dominion.player.Player;
 
+import java.util.Stack;
+
 public class CardEffects {
 
     //Card Effects
@@ -10,8 +12,10 @@ public class CardEffects {
     }
 
     public void plusCards(int numberOfCards, Player player) {
-        for (int i = 0; i < numberOfCards; i++) {
-            player.getHand().add(player.getDeck().pop());
+        Stack<String> deck = player.getDeck();
+
+        for (int i = 0; i < numberOfCards && !deck.isEmpty(); i++) {
+            player.getHand().add(deck.pop());
         }
     }
 

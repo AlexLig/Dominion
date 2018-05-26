@@ -15,6 +15,7 @@ public class Main {
         game.printPlayers();
         */
 
-
+        Game game = new Game(4);
+        game.gameLoop();
     }
 }
