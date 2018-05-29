@@ -23,6 +23,7 @@ public class Game {
     private ArrayList<String> pileOfCards;
     private Map<String, Card> cardMap;
 
+    private int emptyStacks;
     private boolean gameHasEnded;
     private Player winner;
 
@@ -36,6 +37,7 @@ public class Game {
         this.pileOfCards = new ArrayList<>();
         this.players = new ArrayList<>();
         this.gameHasEnded = false;
+        this.emptyStacks =0;
 
         initialisingNamesToCardsMapping();
         initialisingPileOfCards();
@@ -182,9 +184,21 @@ public class Game {
         if (turnPhase == TurnPhase.BUY && player.getTurn().getBuyPoints() > 0 && player.getTurn().getTreasurePoints() >= cardMap.get(card).getCost() && pileOfCards.contains(card)) {
             player.getDiscard().add(card);
             pileOfCards.remove(card);
+
             player.getTurn().removeTreasurePoints(cardMap.get(card).getCost());
+
+            player.getTurn().removeBuyPoints(1);
+
             buyReport(player,card);
-            if (!pileOfCards.contains("Province")){gameHasEnded = true;}
+
+            if (!pileOfCards.contains("Province")){
+                gameHasEnded = true;
+            }
+            else if (!pileOfCards.contains(card)){
+                emptyStacks++;
+                if (emptyStacks>=3){gameHasEnded= true;}
+            }
+
         }
     }
     private void buyReport(Player player, String card){

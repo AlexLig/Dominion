@@ -37,6 +37,7 @@ public class Player {
 
 
     private void drawCards(int numberOfCards) {
+
         if (deck.size() < numberOfCards) {
             int tempDeckSize = deck.size();
             //draw as many cards there are left in deck
@@ -65,6 +66,7 @@ public class Player {
     //Methods for player to play his turn
     public final void play() {
         readyToPlay();
+        System.out.print("NEW TURN:------------>>>  ");
         turnReport();
         playAllCardsInHand();
         game.switchToNextPhase();
@@ -73,6 +75,7 @@ public class Player {
         turnReport();
         buyThings();
         endOfTurn();
+        turnReport();
 
     }
 
@@ -81,7 +84,20 @@ public class Player {
     }
 
     private void turnReport(){
-        System.out.println(String.format("Player %d: Has %d Action Points. %d Buy Points. %d Treasure Points.",id,turn.getActionPoints(),turn.getBuyPoints(),turn.getTreasurePoints()));
+        System.out.println(String.format("Player %d: " +
+                        "Has %d Action Points." +
+                        " %d Buy Points." +
+                        " %d Treasure Points." +
+                        " %d cards in Hand. "+
+                        " %d cards in Discard." +
+                        " %d cards in Deck",
+                        id,
+                        turn.getActionPoints(),
+                        turn.getBuyPoints(),
+                        turn.getTreasurePoints(),
+                        hand.size(),
+                        discard.size(),
+                        deck.size()));
     }
 
     private void playAllCardsInHand(){

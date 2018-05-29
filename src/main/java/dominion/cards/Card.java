@@ -52,6 +52,8 @@ public abstract class  Card {
             activate(player);
             discardCard(player);
             cardReport(player);
+
+
         }
 
     }

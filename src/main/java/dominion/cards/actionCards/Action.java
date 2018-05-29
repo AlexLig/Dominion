@@ -14,7 +14,9 @@ public abstract class Action extends Card {
     }
     protected final boolean canBePlayed(Player player) {
         if (player.getGame().getTurnPhase().equals(TurnPhase.ACTION) && player.getTurn().getActionPoints() > 0) {
+            player.getTurn().removeActionPoints(1);
             return true;
+
         } else return false;
     }
 }
